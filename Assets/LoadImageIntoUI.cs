@@ -27,7 +27,7 @@ public class LoadImageIntoUI : MonoBehaviour
             allImages.Add(Instantiate<GameObject>(imagePrefab, transform).GetComponent<SetImageData>());
         }
 
-        for (int i = 0; i < allImages.Count; i++)
+        for (int i = 0; i < imageFileToRead.ImageDatas.Count; i++)
         {
             allImages[i].SetCreationData(imageFileToRead.ImageDatas[i].imageCreationDate);
             allImages[i].SetImage(imageFileToRead.ImageDatas[i].imageFile);

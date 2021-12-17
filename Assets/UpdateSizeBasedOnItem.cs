@@ -12,13 +12,9 @@ public class UpdateSizeBasedOnItem : MonoBehaviour
     [SerializeField] float cellHeight;
     [SerializeField] int itemsInEachRow;
 
-    Vector2 defaultAnchoredPosition;
-
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-
-        defaultAnchoredPosition = rectTransform.anchoredPosition;
 
         Vector2 cellSize;
         GridLayoutGroup gridLayoutGroup = GetComponent<GridLayoutGroup>();
@@ -34,13 +30,17 @@ public class UpdateSizeBasedOnItem : MonoBehaviour
 
     void updateRectSize()
     {
-        print($"Old Size: {rectTransform.sizeDelta}");
+        //print($"Old Size: {rectTransform.sizeDelta}");
         Vector2 newSize = rectTransform.sizeDelta;
-        newSize.y = cellHeight * (imageFileToRead.ImageDatas.Count / itemsInEachRow);
+        int rowNumber = (imageFileToRead.ImageDatas.Count % itemsInEachRow == 0) ? imageFileToRead.ImageDatas.Count / itemsInEachRow : (imageFileToRead.ImageDatas.Count / itemsInEachRow)+1;
+        newSize.y = cellHeight * rowNumber;
         rectTransform.sizeDelta = newSize;
-        rectTransform.anchoredPosition = defaultAnchoredPosition;
+        print($"OLD position: {rectTransform.position}");
 
-        print($"new Size: {rectTransform.sizeDelta}");
+
+        rectTransform.localPosition = new Vector2(0, -(newSize.y / 2));
+        print($"New position: {rectTransform.position}");
+        //print($"new Size: {rectTransform.sizeDelta}");
 
     }
 
