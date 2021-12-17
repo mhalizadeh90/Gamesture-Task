@@ -1,12 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "Image Data", menuName = "Scriptable Objects/Image Data")]
-public class ImageFileData : ScriptableObject
-{
-    public List<ImageData> ImageDatas;
-}
+﻿using UnityEngine;
 
 [System.Serializable]
 public class ImageData

@@ -30,8 +30,8 @@ public class LoadImageFiles : MonoBehaviour
         if (!Directory.Exists(directoryAddress))
             return;
 
-        imageFileData.ImageDatas.Clear();
-        imageFileData.ImageDatas = getFileDataFromDirectory(directoryAddress);
+        imageFileData.ImageData.Clear();
+        imageFileData.ImageData = getFileDataFromDirectory(directoryAddress);
        
         OnLoadingImagesDone?.Invoke();
     }

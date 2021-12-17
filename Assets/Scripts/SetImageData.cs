@@ -5,20 +5,25 @@ using UnityEngine.UI;
 
 public class SetImageData : MonoBehaviour
 {
+    #region Fields
+
     [SerializeField] Text nameText;
     [SerializeField] Text dateText;
     [SerializeField] Image uiImage;
-    public void SetName(string name)
+
+    #endregion
+
+    public void updateName(string name)
     {
         nameText.text = name;
     }
 
-    public void SetCreationData(string date)
+    public void updateCreationData(string date)
     {
         dateText.text = date;
     }
 
-    public void SetImage(Sprite image)
+    public void updateImageSource(Sprite image)
     {
         uiImage.sprite = image;
     }

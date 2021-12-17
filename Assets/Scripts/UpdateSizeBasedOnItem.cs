@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class UpdateSizeBasedOnItem : MonoBehaviour
 {
-    [SerializeField] CanvasScaler canvasscalar;
-    RectTransform rectTransform;
-    [SerializeField] ImageFileData imageFileToRead;
+    #region Fields
 
-    [SerializeField] float cellHeight;
-    [SerializeField] int itemsInEachRow;
+    [SerializeField] CanvasScaler canvasscalar;
+    [SerializeField] ImageFileData imageFileToRead;
+    float cellHeight;
+    int itemsInEachRow;
+    RectTransform rectTransform;
+
+    #endregion
 
     void Awake()
     {
@@ -30,18 +33,11 @@ public class UpdateSizeBasedOnItem : MonoBehaviour
 
     void updateRectSize()
     {
-        //print($"Old Size: {rectTransform.sizeDelta}");
         Vector2 newSize = rectTransform.sizeDelta;
-        int rowNumber = (imageFileToRead.ImageDatas.Count % itemsInEachRow == 0) ? imageFileToRead.ImageDatas.Count / itemsInEachRow : (imageFileToRead.ImageDatas.Count / itemsInEachRow)+1;
+        int rowNumber = (imageFileToRead.ImageData.Count % itemsInEachRow == 0) ? imageFileToRead.ImageData.Count / itemsInEachRow : (imageFileToRead.ImageData.Count / itemsInEachRow)+1;
         newSize.y = cellHeight * rowNumber;
         rectTransform.sizeDelta = newSize;
-        print($"OLD position: {rectTransform.position}");
-
-
         rectTransform.localPosition = new Vector2(0, -(newSize.y / 2));
-        print($"New position: {rectTransform.position}");
-        //print($"new Size: {rectTransform.sizeDelta}");
-
     }
 
     void OnDisable()
