@@ -15,7 +15,7 @@ public class UpdateUIFromDirectory : MonoBehaviour
 
     void OnEnable()
     {
-        LoadImageFiles.OnLoadingImagesDone += updateUI;
+        LoadImageFiles.OnLoadingImagesDataDone += updateUI;
     }
 
     void updateUI()
@@ -51,6 +51,6 @@ public class UpdateUIFromDirectory : MonoBehaviour
 
     void OnDisable()
     {
-        LoadImageFiles.OnLoadingImagesDone -= updateUI;
+        LoadImageFiles.OnLoadingImagesDataDone -= updateUI;
     }
 }

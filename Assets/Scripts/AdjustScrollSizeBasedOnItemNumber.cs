@@ -24,7 +24,7 @@ public class AdjustScrollSizeBasedOnItemNumber : MonoBehaviour
 
     void OnEnable()
     {
-        LoadImageFiles.OnLoadingImagesDone += AdjustScrollRect;
+        LoadImageFiles.OnLoadingImagesDataDone += AdjustScrollRect;
     }
 
     void AdjustScrollRect()
@@ -57,6 +57,6 @@ public class AdjustScrollSizeBasedOnItemNumber : MonoBehaviour
 
     void OnDisable()
     {
-        LoadImageFiles.OnLoadingImagesDone -= AdjustScrollRect;
+        LoadImageFiles.OnLoadingImagesDataDone -= AdjustScrollRect;
     }
 }

@@ -9,37 +9,34 @@ public class LoadImageFiles : MonoBehaviour
     
     [SerializeField] ImageFileData imageFileData;
     [SerializeField] string resourceFolder;
-    string directoryAddress;
     int lastIndexOfDirectoryString;
-
+    string directoryAddress;
     #endregion
 
-    void Awake()
-    {
-        directoryAddress = Directory.GetCurrentDirectory() + "\\Assets\\Resources\\" + resourceFolder;
-        lastIndexOfDirectoryString = directoryAddress.Length + 1 ;
-    }
 
     void Start()
     {
-        LoadImageFromDirectory();
+        directoryAddress = Directory.GetCurrentDirectory() + "\\Assets\\Resources\\" + resourceFolder;
+        lastIndexOfDirectoryString = directoryAddress.Length + 1;
+        
+        LoadImagesDataFromDirectory();
     }
 
-    public void LoadImageFromDirectory()
+    public void LoadImagesDataFromDirectory()
     {
         if (!Directory.Exists(directoryAddress))
             return;
 
         imageFileData.ImageData.Clear();
-        imageFileData.ImageData = getFileDataFromDirectory(directoryAddress);
+        imageFileData.ImageData = getFileDataFromDirectory();
        
-        OnLoadingImagesDone?.Invoke();
+        OnLoadingImagesDataDone?.Invoke();
     }
 
-    List<ImageData> getFileDataFromDirectory(string address)
+    List<ImageData> getFileDataFromDirectory()
     {
         List<ImageData> fileData = new List<ImageData>();
-        string[] fileAdresses = Directory.GetFiles(address, "*.png");
+        string[] fileAdresses = Directory.GetFiles(directoryAddress, "*.png");
 
         foreach (string fileAddress in fileAdresses)
         {
@@ -57,5 +54,5 @@ public class LoadImageFiles : MonoBehaviour
     }
 
     //--------Actions------------
-    public static Action OnLoadingImagesDone;
+    public static Action OnLoadingImagesDataDone;
 }
