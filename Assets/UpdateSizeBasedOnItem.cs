@@ -25,7 +25,7 @@ public class UpdateSizeBasedOnItem : MonoBehaviour
 
     void OnEnable()
     {
-        LoadItems.OnImagesLoaded += updateRectSize;
+        LoadImageFiles.OnLoadingImagesDone += updateRectSize;
     }
 
     void updateRectSize()
@@ -46,6 +46,6 @@ public class UpdateSizeBasedOnItem : MonoBehaviour
 
     void OnDisable()
     {
-        LoadItems.OnImagesLoaded -= updateRectSize;
+        LoadImageFiles.OnLoadingImagesDone -= updateRectSize;
     }
 }

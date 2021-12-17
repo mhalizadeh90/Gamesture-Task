@@ -13,7 +13,7 @@ public class LoadImageIntoUI : MonoBehaviour
 
     void OnEnable()
     {
-        LoadItems.OnImagesLoaded += LoadImagesIntoUI;
+        LoadImageFiles.OnLoadingImagesDone += LoadImagesIntoUI;
     }
 
     void LoadImagesIntoUI()
@@ -41,6 +41,6 @@ public class LoadImageIntoUI : MonoBehaviour
 
     void OnDisable()
     {
-        LoadItems.OnImagesLoaded -= LoadImagesIntoUI;
+        LoadImageFiles.OnLoadingImagesDone -= LoadImagesIntoUI;
     }
 }
