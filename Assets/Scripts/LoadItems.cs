@@ -9,7 +9,6 @@ public class LoadItems : MonoBehaviour
 {
     [SerializeField] string resourceFolder;
     [SerializeField] string fullDirectory;
-    [SerializeField] AudioClip[] audios;
     [SerializeField] List<Sprite> sprites = new List<Sprite>();
     [SerializeField] Image UIImage;
     [SerializeField] Text UIText;
