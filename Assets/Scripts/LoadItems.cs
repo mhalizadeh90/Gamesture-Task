@@ -1,17 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
 
 public class LoadItems : MonoBehaviour
 {
     [SerializeField] string resourceFolder;
     [SerializeField] string fullDirectory;
     [SerializeField] List<Sprite> sprites = new List<Sprite>();
-    [SerializeField] Image UIImage;
-    [SerializeField] Text UIText;
     
     [SerializeField] ImageFileData imageFileData;
 
@@ -21,8 +18,11 @@ public class LoadItems : MonoBehaviour
     {
         fullDirectory = Directory.GetCurrentDirectory() + "\\Assets\\Resources\\" + resourceFolder;
         lastIndex = fullDirectory.Length + 1 ;
+    }
 
-        imageFileData.ImageDatas.Clear();
+    void Start()
+    {
+        Load();
     }
 
     // Update is called once per frame
@@ -34,35 +34,18 @@ public class LoadItems : MonoBehaviour
         }
     }
 
-    void Load()
+    public void Load()
     {
+        imageFileData.ImageDatas.Clear();
+
         print("Loading Items...");
         //-----------------------------------
 
         SearchByDirectory();
-
-        // print(Path.GetExtension(pathToGetExtension));
-
-        //SearchByResourceFolder();
-    }
-
-    private void SearchByResourceFolder()
-    {
-        print("Current Directory: "+Directory.GetCurrentDirectory());
-
-      //  sprites = Resources.LoadAll<Sprite>(resourceFolder);
-
-        var items = Resources.LoadAll(resourceFolder);
-        foreach (var item in items)
-        {
-            print(item.name);
-        }
     }
 
     private void SearchByDirectory()
     {
-        UIText.text = Directory.GetCurrentDirectory();
-
         if (!Directory.Exists(fullDirectory))
             return;
 
@@ -73,29 +56,30 @@ public class LoadItems : MonoBehaviour
         foreach (string file in fileInfo)
         {
             //  print($"Creation Time: {Directory.GetCreationTime(file)}");
-            print($"File: {file}");
+       //     print($"File: {file}");
             
             string filename = file.Substring(lastIndex);
             //print($"{filename} ==> Lenght {filename.Length} ");
             string namewithoutformat = filename.Substring(0, filename.Length - 4);
-            print("Name without Format: "+namewithoutformat);
+     //       print("Name without Format: "+namewithoutformat);
             string finalPath = resourceFolder + "\\" + namewithoutformat;
             sprites.Add(Resources.Load<Sprite>(finalPath));
 
-            print("===============");
+    //        print("===============");
 
-            imageFileData.ImageDatas.Add(new ImageData(Resources.Load<Sprite>(finalPath), namewithoutformat, Directory.GetCreationTime(file).ToShortDateString()));
+            imageFileData.ImageDatas.Add(new ImageData(Resources.Load<Sprite>(finalPath), namewithoutformat, Directory.GetCreationTime(file).ToString()));
         }
 
         //TODO: CALL EVENT TO START REPLACING THESE DATA TO SCREEN
-
-        if(sprites.Count > 0)
-        {
-            UIImage.sprite = sprites[UnityEngine.Random.Range(0, sprites.Count)];
-        }
+        OnImagesLoaded?.Invoke();
 
 
-
-        UIText.text = fullDirectory;
+        //if(sprites.Count > 0)
+        //{
+        //    UIImage.sprite = sprites[UnityEngine.Random.Range(0, sprites.Count)];
+        //}
+        //UIText.text = fullDirectory;
     }
+
+    public static Action OnImagesLoaded;
 }
